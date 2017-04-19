@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour
 		
 		if (running && !gameOver) {
 			count_moves++;
+			score += 1; //------------------------------------ somar pontos enquanto ele estiver vivo ----> Resposta aos apontamentos no PlayerController.cs
 			if (nextSpawn < lvl.hazardCount && Time.fixedTime >= nextSpawnTime) {
 				SpawnNext ();
 				if (nextSpawn < lvl.hazardCount) {

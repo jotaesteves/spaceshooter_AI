@@ -28,10 +28,14 @@ public class ExampleIndividual : Individual {
 		}
 			
 	}
+		
 
 	public override void Mutate (float probability)  //------------- falta implementar   (pelo menos um de mutção)
 	{
-		throw new System.NotImplementedException ();
+		//throw new System.NotImplementedException ();
+		NewValueMutation1 (probability);
+		//NewValueMutation2 (probability);
+
 	}
 
 	public override void Crossover (Individual partner, float probability) // ---------------- falta implementar (pelo menos um de crossover)
@@ -73,6 +77,11 @@ public class ExampleIndividual : Individual {
 		//TODO continue function
 	}
 
+	public void NewValueMutation1 (float probability){
+		
+	}
+		
+
 	public override string ToString ()
 	{
 		string res = "[ExampleIndividual] Chromosome1: [";
@@ -97,3 +106,7 @@ public class ExampleIndividual : Individual {
 		return res;
 	}
 }
+
+
+// Perceber como os cromossomas são criados, o porquê de existirem chromossom1 e chromossom2 e para que é que servem
+// Perceber como é que fazemos as mutações: em que lista é que temos de fazer as mutações

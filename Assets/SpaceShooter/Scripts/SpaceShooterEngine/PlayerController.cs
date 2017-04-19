@@ -91,3 +91,4 @@ public class PlayerController : MonoBehaviour
 }
 
 //----- altererar o score, implementando um score positivo para quanto tempo o player mantem se vivo (game controller é mais facil de fazer)
+//----- ver GameController.cs ----> score+=1 linha 54

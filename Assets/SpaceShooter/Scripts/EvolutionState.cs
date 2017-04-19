@@ -12,6 +12,7 @@ public class EvolutionState : MonoBehaviour
 	public float crossoverProbability;
 	public int tournamentSize;
 	public string statsFilename = "log.txt";
+	private SelectionMethod tournament;
 	public StatisticsLogger stats;
 
 	protected List<Individual> population;
@@ -49,6 +50,7 @@ public class EvolutionState : MonoBehaviour
 	{
 		generation = 0;
 		selection = new RandomSelection ();  //-------- mudar quando for outro algoritmo
+		//selection = new TournamentSelection (); ----------da erro!!!!
 		stats = new StatisticsLogger (statsFilename);   
 	}
 
