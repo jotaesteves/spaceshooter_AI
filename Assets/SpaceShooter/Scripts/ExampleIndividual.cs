@@ -66,6 +66,13 @@ public class ExampleIndividual : Individual {
 		return new_ind;
 	}
 
+	public void HalfCrossover(Individual ind, float probability){
+		if (UnityEngine.Random.Range (0f, 1f) > probability) {
+			return;
+		}
+		//TODO continue function
+	}
+
 	public override string ToString ()
 	{
 		string res = "[ExampleIndividual] Chromosome1: [";
