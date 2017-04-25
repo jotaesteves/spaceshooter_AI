@@ -49,8 +49,8 @@ public class EvolutionState : MonoBehaviour
 	void Start()
 	{
 		generation = 0;
-		selection = new RandomSelection ();  //-------- mudar quando for outro algoritmo
-		//selection = new TournamentSelection (); ----------da erro!!!!
+		//selection = new RandomSelection ();  //-------- mudar quando for outro algoritmo
+		selection = new TournamentSelection (tournamentSize); //------------ FIXED: aceita o valor dado no GUI
 		stats = new StatisticsLogger (statsFilename);   
 	}
 

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-{
+
 	public class TournamentSelection : SelectionMethod
 	{
 		int tournamentNumber;
@@ -52,5 +52,5 @@ using System.Collections.Generic;
 		}
 
 	}
-}
+
 

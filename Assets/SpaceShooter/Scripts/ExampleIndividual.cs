@@ -33,10 +33,56 @@ public class ExampleIndividual : Individual {
 	public override void Mutate (float probability)  //------------- falta implementar   (pelo menos um de mutção)
 	{
 		//throw new System.NotImplementedException ();
+		//var mutate = new Mutation (probability); 
 		NewValueMutation1 (probability);
+		Mutation (probability); 
 		//NewValueMutation2 (probability);
 
 	}
+		
+	//EXEMPLO 1
+//	protected override void PerformMutate(IChromosome chromosome, float probability)
+//	{      
+//		if (RandomizationProvider.Current.GetDouble() <= probability)
+//		{
+//			var indexes = RandomizationProvider.Current.GetUniqueInts(2, 0, chromosome.Length);
+//			var firstIndex = indexes[0];
+//			var secondIndex = indexes[1];
+//			var firstGene = chromosome.GetGene(firstIndex);
+//			var secondGene = chromosome.GetGene(secondIndex);
+//
+//			chromosome.ReplaceGene(firstIndex, secondGene);
+//			chromosome.ReplaceGene(secondIndex, firstGene);
+//		}
+//	}
+
+
+	public void Mutation(float probability){
+
+		for (int i = 0; i < chromosomeSize; i++) 
+		{
+			chromosome1 [i] = Random.Range (-1, 2);
+			chromosome2 [i] = (Random.Range (0, 2) == 1); // true or false
+		}
+
+		throw new System.NotImplementedException ();
+	}
+
+	//EXEMPLO 2
+
+	//private void Mutate(IList<chromosome1> chromosomes)
+	//{
+	//	foreach (var c in chromosomes)
+	//	{
+	//		Mutation.Mutate(c, MutationProbability);
+	//	}
+	//}
+
+
+	//--------------------------------
+
+
+
 
 	public override void Crossover (Individual partner, float probability) // ---------------- falta implementar (pelo menos um de crossover)
 	{
