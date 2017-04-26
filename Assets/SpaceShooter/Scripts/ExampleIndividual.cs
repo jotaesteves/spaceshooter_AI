@@ -32,12 +32,7 @@ public class ExampleIndividual : Individual {
 
 	public override void Mutate (float probability)  //------------- falta implementar   (pelo menos um de mutção)
 	{
-		//throw new System.NotImplementedException ();
-		//var mutate = new Mutation (probability); 
-		NewValueMutation1 (probability);
 		Mutation (probability); 
-		//NewValueMutation2 (probability);
-
 	}
 		
 	//EXEMPLO 1
@@ -59,13 +54,19 @@ public class ExampleIndividual : Individual {
 
 	public void Mutation(float probability){
 
-		for (int i = 0; i < chromosomeSize; i++) 
-		{
-			chromosome1 [i] = Random.Range (-1, 2);
-			chromosome2 [i] = (Random.Range (0, 2) == 1); // true or false
-		}
+		int firstIndex;//parent
+	
 
-		throw new System.NotImplementedException ();
+
+		for (int i = 0; i < chromosomeSize; i++) {
+			firstIndex = chromosome1 [i];
+			//secoundIndex = chromosome1 [i+1];
+			if (Random.Range (0,101) <= (float)probability * 100){
+				chromosome1 [i] = Random.Range (-1, 2); //------ dá novo valor random
+			}else{
+				chromosome1 [i] = firstIndex;
+		}
+		
 	}
 
 	//EXEMPLO 2
