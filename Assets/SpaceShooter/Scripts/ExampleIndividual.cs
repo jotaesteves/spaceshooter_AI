@@ -32,63 +32,106 @@ public class ExampleIndividual : Individual {
 
 	public override void Mutate (float probability)  //------------- falta implementar   (pelo menos um de mutção)
 	{
-		Mutation (probability); 
+		SequenceMutation (probability); 
 	}
 		
-	//EXEMPLO 1
-//	protected override void PerformMutate(IChromosome chromosome, float probability)
-//	{      
-//		if (RandomizationProvider.Current.GetDouble() <= probability)
-//		{
-//			var indexes = RandomizationProvider.Current.GetUniqueInts(2, 0, chromosome.Length);
-//			var firstIndex = indexes[0];
-//			var secondIndex = indexes[1];
-//			var firstGene = chromosome.GetGene(firstIndex);
-//			var secondGene = chromosome.GetGene(secondIndex);
-//
-//			chromosome.ReplaceGene(firstIndex, secondGene);
-//			chromosome.ReplaceGene(secondIndex, firstGene);
-//		}
-//	}
 
 
-	public void Mutation(float probability){
 
-		int firstIndex;//parent
+	public void SequenceMutation(float probability){
 	
-
-
 		for (int i = 0; i < chromosomeSize; i++) {
-			firstIndex = chromosome1 [i];
-			//secoundIndex = chromosome1 [i+1];
-			if (Random.Range (0,101) <= (float)probability * 100){
+			if (Random.Range (0f,101f) <= (float)probability * 100f){
 				chromosome1 [i] = Random.Range (-1, 2); //------ dá novo valor random
-			}else{
-				chromosome1 [i] = firstIndex;
+			}
+			if (Random.Range (0f, 101f) <= (float)probability * 100f) {
+				chromosome2 [i] = (Random.Range(0,2) == 1);
+			}
 		}
-		
 	}
-
-	//EXEMPLO 2
-
-	//private void Mutate(IList<chromosome1> chromosomes)
-	//{
-	//	foreach (var c in chromosomes)
-	//	{
-	//		Mutation.Mutate(c, MutationProbability);
-	//	}
-	//}
-
 
 	//--------------------------------
 
 
 
 
-	public override void Crossover (Individual partner, float probability) // ---------------- falta implementar (pelo menos um de crossover)
+	public override void Crossover(Individual partner, float probability) // ---------------- falta implementar (pelo menos um de crossover)
 	{
 		throw new System.NotImplementedException ();
 	}
+
+
+//
+//	public override void NCrossover(Individual partner, float probability,int cutPoints) {
+//
+//		if (UnityEngine.Random.Range (0f, 1f) > probability) {
+//			return;
+//		}
+//
+//		List<int> ncrossover = new List<int>();
+//
+//		int found = 0;
+//		int rand;
+//
+//		while(ncrossover.Count != cutPoints)
+//		{
+//			rand = UnityEngine.Random.Range(0, chromosomeSize);
+//
+//			if (!ncrossover.Contains(rand))
+//			{
+//				ncrossover.Add(rand);
+//			}
+//		}
+//
+//		ncrossover.Sort ();
+//
+//
+//		List<float> ncrossoverFinal = new List<float>();
+//		for (int j = 0; j < ncrossover.Count; j++)
+//		{
+//			int limit = (j == ncrossover.Count-1)?cutPoints-1:ncrossover[j+1];
+//			for (int i = ncrossover[j]; i < limit; i++)
+//			{
+//				float parent = [[i]];
+//				trackPoi[keys[i]] = partner.trackPoints[keys[i]];
+//				partner.trackPoints[keys[i]] = tmp;
+//				j++;
+//			}
+//		}
+//
+//	}
+//
+//
+//	void HalfCrossover(Individual partner, float probability) {
+//
+//		if (UnityEngine.Random.Range (0f, 1f) > probability) {
+//			return;
+//		}
+//		//this example always splits the chromosome in half
+//		int crossoverPoint = Mathf.FloorToInt (info.numTrackPoints / 2f);
+//		List<float> keys = new List<float>(trackPoints.Keys);
+//		for (int i=0; i<crossoverPoint; i++) {
+//			float tmp = trackPoints[keys[i]];
+//			trackPoints[keys[i]] = partner.trackPoints[keys[i]];
+//			partner.trackPoints[keys[i]]=tmp;
+//		}
+//
+//	}
+//
+
+
+	//---- desvio padrao
+	float GetDesvioPadrao() {
+		float mean = (chromosome1[0] + chromosome1[chromosome1.Length]) /2;
+		float sigma = (chromosome1[chromosome1.Length] - mean) / 3;
+
+		return UnityEngine.Random.Range(mean, sigma);
+	}
+
+
+
+
+
 
 	public override void Translate () //traduzir o fenotipo para o genotipo
 	{
