@@ -8,7 +8,9 @@ public abstract class SelectionMethod {
 
 	}
 
-	//override on each specific selection class
+	//override on each specific selection class 
 	public abstract List<Individual> selectIndividuals (List<Individual> oldpop, int num); 
+
+
 
 }

@@ -8,6 +8,11 @@
 	protected float fitness;
 	protected bool evaluated;
 
+	//protected int mutationType = 3;
+	//protected int crossoverType = 1;
+	public int n_cuts; //---------- n cuts
+
+
 	public int Size
 	{
 		get { return totalSize;}

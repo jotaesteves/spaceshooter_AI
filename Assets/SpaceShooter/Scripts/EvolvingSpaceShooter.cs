@@ -62,16 +62,15 @@ public class EvolvingSpaceShooter : MonoBehaviour
 			gameOverText.text = "";
 		}
 
+		evolEngine= this.GetComponentInParent<EvolutionState> ();
+
+		BatchmodeConfig.HandleArgs (evolEngine, this);
 
 		lvl = new Level ();
 		lvl.load (levelNumber);
 
-		// evolEngine
-		evolEngine= this.GetComponentInParent<EvolutionState> ();
-
 		evolEngine.populationSize = 50;
 		evolEngine.individualSize = lvl.calcNumberOfMoves ();
-		evolEngine.individualMultiplier = 10;
 		evolEngine.InitPopulation();
 
 		init ();
@@ -80,16 +79,18 @@ public class EvolvingSpaceShooter : MonoBehaviour
 
 
 
-	public void createSimulationGrid ( int numberOfSimsNeeded)
+	public void createSimulationGrid (int numberOfSimsNeeded)
 	{
 		simsInfo = new List<SimulationInfo> ();
 		/// SIMULATION GRID! 
 		/// cam config:  position -5 10 -5    Ortho size 80 
 		/// 50 ...
-		int cols = 10, lines = 5;
+
+		int cols = 10;
+		int lines = numberOfSimsNeeded / 10;
 		float game_width = 16; 
 		float game_height = 31;
-		int cols_done = 0; 
+		int cols_done = 0;
 		for (int i = -5; cols_done < cols; i++, cols_done++) {
 			for (int j = 0; j < lines; j++) {
 				GameObject tmp = Instantiate(simPrefab, transform.position + new Vector3(i * game_width, 0, j * -game_height ), transform.rotation);
@@ -213,6 +214,10 @@ public class EvolvingSpaceShooter : MonoBehaviour
 					allFinished = true;
 				}
 
+				if (BatchmodeConfig.batchmode) {
+					Application.Quit ();
+				}
+
 				//Play best solution
 				initBestSim ();
 			}
@@ -221,7 +226,7 @@ public class EvolvingSpaceShooter : MonoBehaviour
 	}
 
 	void init(){
-		createSimulationGrid (evolEngine.Population.Count);
+		createSimulationGrid (evolEngine.populationSize);
 		initSimulations();
 		updatePlayers ();
 		startSimulations ();

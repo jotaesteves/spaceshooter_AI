@@ -30,7 +30,7 @@ public class ExampleIndividual : Individual {
 	}
 		
 
-	public override void Mutate (float probability)  //------------- falta implementar   (pelo menos um de mutção)
+	public override void Mutate (float probability)  //------------- 
 	{
 		SequenceMutation (probability); 
 	}
@@ -48,17 +48,50 @@ public class ExampleIndividual : Individual {
 				chromosome2 [i] = (Random.Range(0,2) == 1);
 			}
 		}
-	}
+	} // modify to not be the same as before
 
 	//--------------------------------
 
-
-
-
-	public override void Crossover(Individual partner, float probability) // ---------------- falta implementar (pelo menos um de crossover)
+	public override void Crossover (Individual partner, float probability)
 	{
-		throw new System.NotImplementedException ();
+		//N_Point Crossover
+		//Basic theory: 
+		//1: random probability of happening the crossover between 0f and 1f
+		//Loop through all chromossome pairs
+		//Pick a random position to cut (n_cuts) ---------> should be dynamically changed in Unity, not in the code
+		//Create 2 new chromossomes with the two parts cut (Clone?)
+		ExampleIndividual bitFlipPartner = (ExampleIndividual)partner;
+
+		//Debug.Log (n_cuts + " cuts");
+
+		if (UnityEngine.Random.Range (0f, 1f) > probability) {
+			return;
+		}
+		int crossoverPoint = Mathf.FloorToInt (chromosomeSize / (n_cuts + 1));
+
+		for (int i = crossoverPoint; i < chromosomeSize; i += 2 * crossoverPoint) {
+			for (int j = i; j < chromosomeSize && j < i + crossoverPoint; j++) {
+				int temp1 = chromosome1 [j];
+				bool temp2 = chromosome2 [j];
+				chromosome1 [j] = bitFlipPartner.chromosome1 [j];
+				chromosome2 [j] = bitFlipPartner.chromosome2 [j];
+
+				bitFlipPartner.chromosome1 [j] = temp1;
+				bitFlipPartner.chromosome2 [j] = temp2;
+
+			}
+		}
+
+
+
 	}
+
+
+
+	//public override void Crossover(Individual partner, float probability) // ---------------- falta implementar (pelo menos um de crossover)
+	//{
+	//	throw new System.NotImplementedException ();
+	//}
 
 
 //

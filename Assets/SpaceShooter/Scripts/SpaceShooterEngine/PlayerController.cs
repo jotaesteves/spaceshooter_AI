@@ -65,11 +65,12 @@ public class PlayerController : MonoBehaviour
 					if (testIndividual.shots [count_moves]) {
 						nextFire = Time.time + (fireRate);
 						Instantiate (shot, shotSpawn.position, shotSpawn.rotation, transform.parent);
-						gc.AddScore (-1); //---------------------------------------------------------- for every shot fired -1 score
+						gc.AddScore (-1); // for every shot fired -1 score
 					}
 				}
 
 				moveHorizontal = testIndividual.horizontalMoves [count_moves];
+				moveVertical = testIndividual.verticalMoves [count_moves];
 
 			}
 
@@ -89,6 +90,3 @@ public class PlayerController : MonoBehaviour
 
 	}
 }
-
-//----- altererar o score, implementando um score positivo para quanto tempo o player mantem se vivo (game controller é mais facil de fazer)
-//----- ver GameController.cs ----> score+=1 linha 54

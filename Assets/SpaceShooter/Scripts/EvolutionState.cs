@@ -11,8 +11,10 @@ public class EvolutionState : MonoBehaviour
 	public float mutationProbability;
 	public float crossoverProbability;
 	public int tournamentSize;
+
+	public int N_cutsCrossover;
+
 	public string statsFilename = "log.txt";
-	private SelectionMethod tournament;
 	public StatisticsLogger stats;
 
 	protected List<Individual> population;
@@ -49,9 +51,8 @@ public class EvolutionState : MonoBehaviour
 	void Start()
 	{
 		generation = 0;
-		//selection = new RandomSelection ();  //-------- mudar quando for outro algoritmo
-		selection = new TournamentSelection (tournamentSize); //------------ FIXED: aceita o valor dado no GUI
-		stats = new StatisticsLogger (statsFilename);   
+		selection = new RandomSelection ();
+		stats = new StatisticsLogger (statsFilename);
 	}
 
 
@@ -84,15 +85,19 @@ public class EvolutionState : MonoBehaviour
 			for (int i = 0; i < populationSize; i += 2) {
 				Individual parent1 = new_pop [i];
 				Individual parent2 = new_pop [i + 1];
+				parent1.n_cuts = N_cutsCrossover; //---
 				parent1.Crossover (parent2, crossoverProbability);
 			}
 
 			//Mutation and Translation 
-			for (int i = 1; i < populationSize; i++) {
+			for (int i = 0; i < populationSize; i++) {
 				new_pop [i].Mutate (mutationProbability);
 				new_pop [i].Translate ();
 			}
-				
+
+
+			//------Elitism 
+
 			//Select new population
 			population = new_pop;
 
