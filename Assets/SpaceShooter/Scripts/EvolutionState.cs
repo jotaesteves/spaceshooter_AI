@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;    
+using System.Collections.Generic;
 
 public class EvolutionState : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class EvolutionState : MonoBehaviour
 	public float mutationProbability;
 	public float crossoverProbability;
 	public int tournamentSize;
-
+	public int IndividualElitism;
 	public int N_cutsCrossover;
 
 	public string statsFilename = "log.txt";
@@ -22,7 +22,7 @@ public class EvolutionState : MonoBehaviour
 
 	protected int evaluatedIndividuals;
 
-	public int generation; 
+	public int generation;
 
 	public List<Individual> Population
 	{
@@ -65,13 +65,13 @@ public class EvolutionState : MonoBehaviour
 			new_ind.Translate ();
 			population.Add (new_ind);
 		}
-			
+
 	}
 
 	//The Step function assumes that the fitness values of all the individuals in the population have been calculated.
 	public virtual void Step()
 	{
-		if (generation < numGenerations) 
+		if (generation < numGenerations)
 		{
 			List<Individual> new_pop;
 
@@ -79,25 +79,28 @@ public class EvolutionState : MonoBehaviour
 			stats.GenLog (population, generation);
 
 			//Select parents
-			new_pop = selection.selectIndividuals (population, populationSize);
+			new_pop = selection.selectIndividuals (population, populationSize - IndividualElitism);
 
 			//-----------Crossover
-			for (int i = 0; i < populationSize; i += 2) {
+			for (int i = 0; i < populationSize - IndividualElitism; i += 2) {
 				Individual parent1 = new_pop [i];
 				Individual parent2 = new_pop [i + 1];
 				parent1.n_cuts = N_cutsCrossover; //----------------
 				parent1.Crossover (parent2, crossoverProbability);
 			}
 
-			//-------------Mutation and Translation 
-			for (int i = 0; i < populationSize; i++) {
+			//-------------Mutation and Translation
+			for (int i = 0; i < populationSize - IndividualElitism; i++) {
 				new_pop [i].Mutate (mutationProbability);
 				new_pop [i].Translate ();
 			}
 
 
-			//------Elitism 
-
+			//------Elitism
+			population.Sort ((x, y) => y.Fitness.CompareTo (x.Fitness));
+			for (int i = 0; i < IndividualElitism; i++) {
+				new_pop.Add (population [i]);
+			}
 
 
 
@@ -116,4 +119,3 @@ public class EvolutionState : MonoBehaviour
 	}
 
 }
-
