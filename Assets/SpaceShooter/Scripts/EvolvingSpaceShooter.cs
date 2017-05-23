@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;        
 using UnityEngine.UI;
+using System.Linq;
 
 
 public class SimulationInfo 
@@ -173,6 +174,7 @@ public class EvolvingSpaceShooter : MonoBehaviour
 	public void Update(){
 		int i = 0;
 		sims_done = 0;
+		List<int> scores = new List<int> (); // - -------  -------  ------- 
 		foreach (SimulationInfo info in simsInfo) {
 
 			if (info.gamec.gameOver || info.gamec.stageCleared) {
@@ -182,6 +184,7 @@ public class EvolvingSpaceShooter : MonoBehaviour
 
 				// destroy it !
 				Destroy (info.sim);
+				scores.Add (info.gamec.GetScore ());//  -------  -------  -------  ------- 
 			}
 
 			i++;
@@ -192,8 +195,9 @@ public class EvolvingSpaceShooter : MonoBehaviour
 			bestSimInfo = null;
 			bestFinished = true;
 		}
-
-		restartText.text = "Generation: " + evolEngine.generation + "/" + evolEngine.numGenerations + "\nSims Done: " + sims_done + " / " + simsInfo.Count;
+		scores.Sort(); // -------  -------  -------  ------- 
+		int best = scores.LastOrDefault (); // ----------
+		restartText.text = "Generation: " + evolEngine.generation + "/" + evolEngine.numGenerations + "\nSims Done: " + sims_done + " / " + simsInfo.Count + "\nBest score: "+best;
 	}
 		
 	public void FixedUpdate(){

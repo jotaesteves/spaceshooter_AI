@@ -14,7 +14,6 @@ public class StatisticsLogger {
 	private string filename;
 	private StreamWriter logger;
 
-
 	public StatisticsLogger(string name) {
 		filename = name;
 		bestFitness = new Dictionary<int,float> ();
@@ -37,14 +36,13 @@ public class StatisticsLogger {
 		meanFitness [currentGen] /= pop.Count;
 
 
-		foreach (Individual ind in pop) {
+		foreach (Individual ind in pop) { // ------- standart deviantion 
 			avgSquaredFitness += Mathf.Pow (ind.Fitness - meanFitness [currentGen], 2);
 		}
 
 		float a = Mathf.Sqrt (avgSquaredFitness / pop.Count);
-		standardFitness.Add (currentGen, a);
-		//standardFitness = raiz quad [somatorio (ind.Fitness - meanFitness) ao quadrado / n_elementos];
-		//The square root of the sum for each element of each element minus the avarage math.pow dividing by the number of elements
+		standardFitness.Add (currentGen, a); //-------
+
 
 		//pscore = GameController.; 
 
