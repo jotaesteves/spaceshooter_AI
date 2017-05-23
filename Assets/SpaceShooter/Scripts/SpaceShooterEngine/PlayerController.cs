@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
 					if (testIndividual.shots [count_moves]) {
 						nextFire = Time.time + (fireRate);
 						Instantiate (shot, shotSpawn.position, shotSpawn.rotation, transform.parent);
-						gc.AddScore (-1); // for every shot fired -1 score
+						//gc.AddScore (-1); //---------------- for every shot fired -1 score
 					}
 				}
 

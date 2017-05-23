@@ -6,7 +6,7 @@ using Mono.Options;
 
 public class BatchmodeConfig {
 
-	public static bool batchmode = true;
+	public static bool batchmode = false;
 
 	private static bool processed = false;
 	private static readonly object syncLock = new object();

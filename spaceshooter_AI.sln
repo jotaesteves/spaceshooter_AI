@@ -1,7 +1,7 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spaceshooter_AI", "Assembly-CSharp.csproj", "{124ADAD2-0D8F-C86E-4AC5-ED2A07C6F154}"
+# Visual Studio 2008
+
+Project("{C03EF1D9-B1C7-AA98-A5DD-5893F03CB841}") = "spaceshooter_AI", "Assembly-CSharp.csproj", "{124ADAD2-0D8F-C86E-4AC5-ED2A07C6F154}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

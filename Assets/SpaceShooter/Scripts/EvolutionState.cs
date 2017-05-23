@@ -81,15 +81,15 @@ public class EvolutionState : MonoBehaviour
 			//Select parents
 			new_pop = selection.selectIndividuals (population, populationSize);
 
-			//Crossover
+			//-----------Crossover
 			for (int i = 0; i < populationSize; i += 2) {
 				Individual parent1 = new_pop [i];
 				Individual parent2 = new_pop [i + 1];
-				parent1.n_cuts = N_cutsCrossover; //---
+				parent1.n_cuts = N_cutsCrossover; //----------------
 				parent1.Crossover (parent2, crossoverProbability);
 			}
 
-			//Mutation and Translation 
+			//-------------Mutation and Translation 
 			for (int i = 0; i < populationSize; i++) {
 				new_pop [i].Mutate (mutationProbability);
 				new_pop [i].Translate ();
@@ -97,6 +97,10 @@ public class EvolutionState : MonoBehaviour
 
 
 			//------Elitism 
+
+
+
+
 
 			//Select new population
 			population = new_pop;

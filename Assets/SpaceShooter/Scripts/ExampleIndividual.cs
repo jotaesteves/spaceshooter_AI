@@ -41,10 +41,8 @@ public class ExampleIndividual : Individual {
 	public void SequenceMutation(float probability){
 	
 		for (int i = 0; i < chromosomeSize; i++) {
-			if (Random.Range (0f,101f) <= (float)probability * 100f){
+			if (Random.Range (0f,1f) <= probability){
 				chromosome1 [i] = Random.Range (-1, 2); //------ dá novo valor random
-			}
-			if (Random.Range (0f, 101f) <= (float)probability * 100f) {
 				chromosome2 [i] = (Random.Range(0,2) == 1);
 			}
 		}

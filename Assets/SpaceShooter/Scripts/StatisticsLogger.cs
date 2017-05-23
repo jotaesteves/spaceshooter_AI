@@ -7,6 +7,9 @@ public class StatisticsLogger {
 
 	public Dictionary<int,float> bestFitness;
 	public Dictionary<int,float> meanFitness;
+	public Dictionary<int,float> standardFitness; //----- standart dev
+
+	//public GameController pscore;
 
 	private string filename;
 	private StreamWriter logger;
@@ -16,6 +19,7 @@ public class StatisticsLogger {
 		filename = name;
 		bestFitness = new Dictionary<int,float> ();
 		meanFitness = new Dictionary<int,float> ();
+		standardFitness = new Dictionary<int, float> (); //----- stdt dev
 
 	}
 
@@ -23,6 +27,7 @@ public class StatisticsLogger {
 	public void GenLog(List<Individual> pop, int currentGen) {
 		pop.Sort((x, y) => y.Fitness.CompareTo(x.Fitness));
 
+		float avgSquaredFitness = 0;
 		bestFitness.Add (currentGen, pop[0].Fitness);
 		meanFitness.Add (currentGen, 0f);
 
@@ -31,8 +36,23 @@ public class StatisticsLogger {
 		}
 		meanFitness [currentGen] /= pop.Count;
 
-		Debug.Log ("generation: " + currentGen + "\tbest: " + bestFitness [currentGen] + "\tmean: " + meanFitness [currentGen]+"\n");
+
+		foreach (Individual ind in pop) {
+			avgSquaredFitness += Mathf.Pow (ind.Fitness - meanFitness [currentGen], 2);
+		}
+
+		float a = Mathf.Sqrt (avgSquaredFitness / pop.Count);
+		standardFitness.Add (currentGen, a);
+		//standardFitness = raiz quad [somatorio (ind.Fitness - meanFitness) ao quadrado / n_elementos];
+		//The square root of the sum for each element of each element minus the avarage math.pow dividing by the number of elements
+
+		//pscore = GameController.; 
+
+		Debug.Log ("generation: " + currentGen + "\tbest: " + bestFitness [currentGen] + "\tmean: " + meanFitness [currentGen]+"\tstandard:" + standardFitness [currentGen] );
 		//Debug.Log ("generation: " + currentGen + "\t solution: " + pop [0].ToString ());
+
+
+
 	}
 
 	//writes to file
