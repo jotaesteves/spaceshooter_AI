@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
+using System.Collections.Generic;    
 
 public class EvolutionState : MonoBehaviour
 {
@@ -11,8 +11,9 @@ public class EvolutionState : MonoBehaviour
 	public float mutationProbability;
 	public float crossoverProbability;
 	public int tournamentSize;
-	public int IndividualElitism;
+
 	public int N_cutsCrossover;
+	public int IndividualElitism;
 
 	public string statsFilename = "log.txt";
 	public StatisticsLogger stats;
@@ -22,7 +23,7 @@ public class EvolutionState : MonoBehaviour
 
 	protected int evaluatedIndividuals;
 
-	public int generation;
+	public int generation; 
 
 	public List<Individual> Population
 	{
@@ -65,13 +66,13 @@ public class EvolutionState : MonoBehaviour
 			new_ind.Translate ();
 			population.Add (new_ind);
 		}
-
+			
 	}
 
 	//The Step function assumes that the fitness values of all the individuals in the population have been calculated.
 	public virtual void Step()
 	{
-		if (generation < numGenerations)
+		if (generation < numGenerations) 
 		{
 			List<Individual> new_pop;
 
@@ -89,16 +90,17 @@ public class EvolutionState : MonoBehaviour
 				parent1.Crossover (parent2, crossoverProbability);
 			}
 
-			//-------------Mutation and Translation
+			//-------------Mutation and Translation 
 			for (int i = 0; i < populationSize - IndividualElitism; i++) {
 				new_pop [i].Mutate (mutationProbability);
 				new_pop [i].Translate ();
 			}
 
 
-			//------Elitism
+			//------Elitism 
 			population.Sort ((x, y) => y.Fitness.CompareTo (x.Fitness));
 			for (int i = 0; i < IndividualElitism; i++) {
+				//Debug.Log(population[i].Fitness);
 				new_pop.Add (population [i]);
 			}
 
@@ -119,3 +121,4 @@ public class EvolutionState : MonoBehaviour
 	}
 
 }
+
