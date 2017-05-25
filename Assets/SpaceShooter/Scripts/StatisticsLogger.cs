@@ -8,6 +8,7 @@ public class StatisticsLogger {
 	public Dictionary<int,float> bestFitness;
 	public Dictionary<int,float> meanFitness;
 	public Dictionary<int,float> standardFitness; //----- standart dev
+	public Dictionary<int, float> worstFitness; //------ worst fit
 
 	//public GameController pscore;
 
@@ -19,6 +20,7 @@ public class StatisticsLogger {
 		bestFitness = new Dictionary<int,float> ();
 		meanFitness = new Dictionary<int,float> ();
 		standardFitness = new Dictionary<int, float> (); //----- stdt dev
+		worstFitness = new Dictionary<int, float> (); //------ worst fit
 
 	}
 
@@ -44,9 +46,13 @@ public class StatisticsLogger {
 		standardFitness.Add (currentGen, a); //-------
 
 
+		worstFitness.Add (currentGen, pop [pop.Count - 1].Fitness); //---- worst fit
+
+
+
 		//pscore = GameController.; 
 
-		Debug.Log ("generation: " + currentGen + "\tbest: " + bestFitness [currentGen] + "\tmean: " + meanFitness [currentGen]+"\tstandard:" + standardFitness [currentGen] );
+		Debug.Log ("generation: " + currentGen + "\tbest: " + bestFitness [currentGen] + "\tmean: " + meanFitness [currentGen]+ "\tworst: "+ worstFitness [currentGen]+  "\tstandard:" + standardFitness [currentGen] );
 		//Debug.Log ("generation: " + currentGen + "\t solution: " + pop [0].ToString ());
 
 
@@ -54,12 +60,23 @@ public class StatisticsLogger {
 	}
 
 	//writes to file
-	public void FinalLog() {
+	public void FinalLog(int individualMultiplier, int numGenerations, int populationSize, float mutationProbability, float crossoverProbability, int tournamentSize, int N_cutsCrossover,int IndividualElitism ) {
 		logger = File.CreateText (filename);
 
+		logger.WriteLine ("Data: ");
+		logger.WriteLine ("Ind mult: " + individualMultiplier);
+		logger.WriteLine ("Num Generations: "+ numGenerations);
+		logger.WriteLine ("Pop Size: "+ populationSize );
+		logger.WriteLine ( "Mutation: " + mutationProbability);
+		logger.WriteLine ( "Crossover: " + crossoverProbability );
+		logger.WriteLine ( "Tourn Size: " + tournamentSize);
+		logger.WriteLine ( "N cuts: " + N_cutsCrossover);
+		logger.WriteLine ( "Elistism: " + IndividualElitism );
+
+		logger.WriteLine ("G |"+"Best |"+ "Mean   |"+"Worst|"+" Dev    |");
 		//writes with the following format: generation, bestfitness, meanfitness
 		for (int i=0; i<bestFitness.Count; i++) {
-			logger.WriteLine(i+","+bestFitness[i]+","+meanFitness[i]);
+			logger.WriteLine(i+" | "+bestFitness[i]+" | "+meanFitness[i]+" | " + worstFitness[i]  +" | "+standardFitness[i]);
 		}
 
 		logger.Close ();

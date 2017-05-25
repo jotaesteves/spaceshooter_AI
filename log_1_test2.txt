@@ -1,0 +1,12 @@
+Data: 
+Ind mult: 5
+Num Generations: 1
+Pop Size: 50
+Mutation: 0.3
+Crossover: 0.5
+Tourn Size: 10
+N cuts: 2
+Elistism: 2
+G |Best |Mean   |Worst | Dev    |
+0 | 184 | 58.28 | -1 | 45.50957
+1 | 183 | 78.18 | -5 | 48.69731

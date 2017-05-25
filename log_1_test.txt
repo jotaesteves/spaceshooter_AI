@@ -1,0 +1,21 @@
+Data: 
+Ind mult: 2
+Num Generations: 10
+Pop Size: 50
+Mutation: 0.3
+Crossover: 0.5
+Tourn Size: 50
+N cuts: 2
+Elistism: 2
+-- -- -- -- -- --
+Gen: 0 / Best: 149 / Mean: 63.56 / Worst: -8 / Dev: 38.24142
+Gen: 1 / Best: 151 / Mean: 77.36 / Worst: -8 / Dev: 40.50321
+Gen: 2 / Best: 150 / Mean: 65.38 / Worst: -3 / Dev: 35.64485
+Gen: 3 / Best: 145 / Mean: 70.68 / Worst: -7 / Dev: 42.86184
+Gen: 4 / Best: 153 / Mean: 71.22 / Worst: -10 / Dev: 44.40284
+Gen: 5 / Best: 153 / Mean: 74.92 / Worst: 0 / Dev: 39.28452
+Gen: 6 / Best: 169 / Mean: 60.12 / Worst: -3 / Dev: 37.97348
+Gen: 7 / Best: 161 / Mean: 78.7 / Worst: 10 / Dev: 39.94258
+Gen: 8 / Best: 161 / Mean: 72.96 / Worst: -3 / Dev: 44.74548
+Gen: 9 / Best: 161 / Mean: 71.9 / Worst: -8 / Dev: 41.17681
+Gen: 10 / Best: 161 / Mean: 72.34 / Worst: 2 / Dev: 41.88824
